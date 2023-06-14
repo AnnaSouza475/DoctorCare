@@ -1,0 +1,667 @@
+/*---------------GERAL-------------------------*/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; /*contar o tamanho apartir da borda*/
+}
+
+:root {
+
+  /*cores para customização*/
+  --hue:180; /*valor aleatório para criação de uma cor*/
+  --primary-color: hsl(var(--hue),100%,26%);
+  --headline: hsl(210, 11%, 15%);
+  --paragraph: hsl(210, 9%, 31%);
+  --brand-beige: hsl(39, 100%, 97%);
+  --brand-green-light: hsl(calc((var(--hue)) - 27),23%, 89%);
+  --brand-green-light-2: hsl(calc((var(--hue)) +10),14%,97%);
+  --brand-green-hover: hsl(var(--hue), 100%, 14%);
+  --bg-green-light:hsl(180, 14%, 97%);
+  
+    /* --primary-color: #00856f;
+  --headline: #212529;
+  --paragraph: #495057;
+  --brand-beige: #FFFAF1;
+  --brand-green-light:#DCE9E2;
+  --brand-green-hover: #00453A;
+  --bg-green-light:#F7F9F9; */
+  --nav-height: 7.2rem;
+
+  font-size: 62.5%; /*10px* - 100%=16px que é o tamnhao padrão do navegador */
+}
+
+html{
+  /*caso não funcione no google ativar em chrome://flags/#smooth-scrolling*/
+  scroll-behavior: smooth; /*mover suavemente o scroll*/
+}
+
+html,
+body {  /*evita problemas com rolagem*/
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  font-family: "DM Sans";
+  font-size: 1.6rem; /*16px*/
+  text-align: center;
+  overflow: overlay; /*sobrepor a barra de rolagem e não contar com o valor das coisas*/
+  background-color: var(--bg-green-light);
+}
+
+.wrapper{
+  /*responsividade minimo de 50rem se for menor pega 100% ( se for maior q 50rem continua com o mesmo tamanho*/
+  width: min(50rem, 100%);
+  margin-inline: auto;
+  padding-inline: 2.4rem;
+}
+
+ul{
+  list-style: none; /*tirar os marcadores de ordem*/
+}
+
+img{
+  max-width: 100%; /*para as imagens respeitarem a largura max da aplicação*/
+}
+
+.button {
+  background: var(--primary-color);
+  margin-bottom: 6rem;
+  border: none;
+  border-radius: 4rem;
+  padding: 1.6rem 3.2rem; /*melhor forma para tamanho de botão*/
+  width: fit-content; /*largura fica adaptada ao conteudo*/
+  color: #fff;
+  text-transform: uppercase; /*Ficar tudo maicusculo*/
+  font-size: 1.4rem;
+  font-weight: 700;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center; /*deixa os elementos ao centro*/
+  gap: 1.6rem; /*espaço entre os elementos*/
+  transition: background 200ms;
+  
+}
+
+.button:hover{ /*passar o mouse em cima*/
+  background-color: var(--brand-green-hover);
+}
+
+section{
+  padding-block: 10rem;
+}
+
+section header h4{
+  /* font-style: normal; Elementos que já fazem parte da tag h4 
+    font-weight: 700; */
+  /* font-size: 14px; Unidaded fixa de medida */
+  font-size: 1.4rem; /*Melhor unidade para acessibilidade, pois é uma medida relativa (1rem = 100%) que no caso é 1.4 = 14px */
+  color: var(--primary-color);
+  margin-bottom: 1.6rem;
+  line-height: 150%;
+  letter-spacing: 0.08rem; /*espaço entre as letras*/
+  text-transform: uppercase;
+}
+
+section header h2{
+  font-size: 3rem;
+  line-height: 3.9rem;
+  color: var(--headline);
+
+}
+
+section header h1{
+    font-size: 3.4rem;
+    color: var(--headline);
+    line-height: 130%;
+    margin-bottom: 2.4rem;
+}
+
+section .content p{
+  font-size: 1.6rem;
+  font-weight: 400;
+  line-height: 150%;
+  color: var(--paragraph);
+}
+
+/*----------------CUSTOMIZAÇÃO----------------*/
+#services .card circle{
+  stroke: var(--brand-green-light);
+}
+/*Vai ate o navigatio procura todos os fill que tenham o valor passado e altera*/
+#navigation .logo path[fill*="00856F"],
+#backToTopButton circle{
+  fill: var(--primary-color);
+}
+
+body.menu-expanded #navigation .logo path,
+#navigation.scroll .logo path {
+  fill: #fff;
+}
+
+#navigation button  path[stroke*='00856F'],
+#contact li path{
+  stroke: var(--primary-color);
+}
+/*quando o navigation estiver em scroll o valor muda para o passado*/
+#navigation.scroll button  path[stroke*='00856F'] {
+  stroke: #fff;
+}
+
+
+
+/*----------------NAVEGAÇÃO----------------*/
+nav{
+  display: flex;
+  height: var(--nav-height);
+  position: fixed;
+  top: 0;
+  width: 100vw; /* viewport tamanho da tela de exibição*/
+
+  /*transform: translateX(-50%); /*deslocamento no eixo x de 50% do valor do tamanho do conteudo*/
+  z-index: 100; /*necessario para subir o menu depois de colocar o scrollreveal*/
+}
+
+nav .wrapper{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+nav.scroll{
+  background-color: var(--primary-color);
+
+}
+
+/*nav.scroll .logo path{ /* trocar a cor do svg 
+  fill: #fff; cor que se encontra no svg
+}*/
+
+/* nav.scroll button path{
+  stroke: #fff;  esse svg a cor é em linha por isso stroke (ambos não podem ser colocados juntos) 
+} */
+
+nav button{
+  background: none;
+  border: none;
+  cursor: pointer; /*deixar a maozinha*/
+}
+
+nav .menu,
+nav .close-menu{
+  position: fixed;
+}
+
+
+
+/*----------------MENU-EXPANDED----------------*/
+
+body.menu-expanded{
+  overflow: hidden; /*tira as barras de rolagem*/
+}
+
+body.menu-expanded > :not(nav){ /*aplicar para todos os filhos do primeiro nivel exceto o nav ( acessibilidade)*/
+  /*display: none; tirar da tela*/
+  visibility: hidden;
+}
+
+.menu, /*quando o menu-expended não estiver aberto o menu e o close-menu tera esse estilo*/
+.close-menu,
+body.menu-expanded .open-menu{ /*quando o menu-expended estiver aberto o menu e o open-menu não vai aparecer*/
+  opacity: 0;
+  visibility: hidden; /*esconder*/
+}
+
+body.menu-expanded .menu, /*quando o menu-expended estiver aberto o menu e o close-menu tera esse estilo*/
+body.menu-expanded .close-menu{ 
+  opacity: 1;
+  visibility: visible;
+}
+
+.menu{
+  transform: translateY(100%);  /*necessário para tirar  menu do campo de visão para ocorrer o efeito de transição*/
+ 
+}
+
+body.menu-expanded .menu{
+  /* position: fixed; */
+  top: 0;
+  left: 0;
+  background-color: var(--primary-color);
+  width: 100vw;
+  height: 100vh;
+  padding-top: var(--nav-height);
+  transition: transform 300ms; /*feito de trasição vindo de baixo para cima (ms=milisegundos) */
+  transform: translateY(0); /*necessario para voltar ao campo de visão quando o menu for ativado */
+}
+
+/*body.menu-expanded nav{  /* tira o espacinho q ficou do nav
+  position: relative;
+}*/
+
+.menu ul:nth-child(1){
+  display: flex;
+  flex-direction: column;
+  gap: 4.8rem;
+  margin-top: 6rem;
+  font-size: 2.4rem;
+  font-weight: 700;
+  line-height: 3.1rem;
+
+}
+
+.menu ul li a{
+  text-decoration: none;
+  color: #fff;
+  
+}
+
+
+.menu .button{
+  background-color: #fff;
+  border-radius: 4rem;
+  font-weight: 700;
+  font-size: 1.8rem;
+  line-height: 2.3rem;
+  text-transform: uppercase;
+  text-decoration: none; /*remover o sublinhado*/
+  color: var(--primary-color);
+  display: inline-block; /*possibilidade de mexer com as margins já q o inline não deixa.*/
+  padding: 1.6rem 3.2rem;
+  margin-top: 4.8rem;
+  margin-bottom: 8rem;
+
+}
+
+.menu .button:hover{
+  background-color: var(--primary-color);
+  color: #fff;
+  
+}
+
+.social-links{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3.2rem;
+}
+
+body.menu-expanded .logo,
+body.menu-expanded button{
+  position: relative;
+  z-index: 100;
+}
+
+body.menu-expanded .logo path{ /* trocar a cor do svg */
+  fill: #fff; /*cor que se encontra no svg*/
+}
+
+body.menu-expanded button path{
+  stroke: #fff; /* esse svg a cor é em linha por isso stroke (ambos não podem ser colocados juntos) */
+}
+
+
+
+/*----------------HOME----------------*/
+
+#home{
+  padding-top:calc(4.1rem + var(--nav-height)); /*para quando ultilizar os links não subir cortando então subistiuimos o margin-top pot padding-top*/
+
+}
+
+#home::before{ /*adiciona conteudo antes do header*/
+  content: "";
+  width: 100%; 
+  height: calc(72% + var(--nav-height));
+  background-color: var(--brand-green-light);
+  display: block;
+  position: absolute; /*Deixa por cima */
+  top: 0;
+  left: 0;
+  z-index: -1; /*indice z teceiro eixo "3d" (eixo x - horizontal, y - vertical). Por padrão é 0 ou seja todos estão no mesmo eixo, colocando no negativo ele vai para trás dos demais*/
+}
+
+#home .button{
+  margin-inline: auto;
+}
+
+#home p {
+  font-size: 1.8rem;
+  color: var(--paragraph);
+  line-height: 150%;
+  font-weight: 400;
+  margin-bottom: 3.2rem;
+}
+
+#home img{
+  width: 26.4rem;
+  display: block;
+  margin-inline: auto; 
+  object-position: 0 2rem;
+
+}
+
+#home .estatisticas{
+  width: 100%;
+  padding-block:  4rem; /*coloca padding acima e a baixo (padding inline - coloca nas laterais)*/
+  margin-inline: auto;
+  background: var(--brand-beige) ;
+  border: 1px solid var(--brand-green-light);
+  border-radius: 0.6rem;
+  display: flex;
+  flex-direction: column; /*deixar em coluna*/
+  justify-content: center;
+  gap: 6rem;
+
+}
+
+#home .estatistica h3{
+  font-size: 4.8rem;
+  color: var(--headline);
+  line-height: 130%;
+  margin-bottom: 0.4rem;
+}
+
+#home .estatistica p{
+  margin: 0;
+  color: var(--primary-color);
+  line-height: 150%;
+}
+
+/*----------------SERVICES----------------*/
+#services header h2{
+  margin-bottom: 6rem;
+}
+
+#services .cards{
+  display: flex;
+  flex-direction: column;
+  gap: 3.2rem;
+}
+
+#services .card{
+  padding: 2.4rem;
+  text-align: left;
+  background-color: #fff;
+  border: 1px solid var(--brand-green-light);
+  border-radius: 0.6rem;
+}
+
+#services .card h3{
+  margin-block: 1.6rem; /*pega em cima e embaixo*/
+}
+
+/*----------------ABOUT----------------*/
+
+#about{
+  text-align: left;
+  background-color: var(--brand-beige);
+}
+
+#about header h2{
+  margin-bottom: 2.4rem;
+}
+
+#about .content p {
+  margin-top: 2.4rem;
+  margin-bottom: 6rem;
+}
+
+/*----------------CONTACT----------------*/
+
+#contact{
+  text-align: left;
+}
+
+#contact header{
+  margin-bottom: 3.2rem;
+}
+
+#contact ul{
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+  margin-bottom: 3.2rem;
+}
+
+#contact ul li{
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+/*----------------FOOTER----------------*/
+
+footer{
+  background-color: var(--primary-color);
+  padding-block: 6rem;
+  text-align: left;
+  color: #fff;
+
+}
+
+footer p{
+  color: var(--brand-beige);
+  line-height: 2;
+  margin-bottom: 3.2rem;
+}
+
+footer .logo{ 
+  display: inline-block; /*necessario pois a tag a é uma tag inline assim nao aceita atributos de altura, dessa forma ela continua com a configuração de linha mas atende tbm as confugurações block*/
+  margin-bottom: 2.4rem;
+
+}
+
+footer .logo svg{
+  width: 23.6rem;
+  height: 3.1rem;
+}
+
+footer .logo path{
+  fill: #fff;
+}
+
+footer .social-links{
+  justify-content: flex-start; /*alinhar ao começo*/
+}
+/*----------------BACK TO TOP BUTTON----------------*/
+
+#backToTopButton{
+  position: fixed;
+  bottom: 1rem;
+  right: 2.5rem;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(100%);
+  transition: 200ms;
+}
+
+#backToTopButton.show{ /*voltar a aparecer*/
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/*--------RESPONSIVIDADE DISPOSITIVOS GRANDE-------*/
+
+/*quando o tamanho do dispositivo for maior que 1024px aplicar esses atributos*/
+@media (min-width: 1024px){
+/*------------------Geral------------------*/
+.wrapper{
+  width: min(112rem, 100%);
+  display: grid;
+}
+/*----------------NAVEGAÇÃO----------------*/
+/* Resetar todos os elementos do wrapper do navigation*/
+nav#navigation .wrapper *{
+  margin: 0;
+  padding: 0;
+  visibility: initial;
+  display: initial;
+  opacity: initial;
+  flex-direction: initial;
+  position: initial;
+  font-size: initial;
+  font-weight: initial;
+  transform: initial;
+  color: initial;
+  background-color: initial;
+  filter: initial;
+
+}
+
+nav#navigation .close-menu,
+nav#navigation .open-menu,
+nav#navigation .social-links{
+  display: none;
+}
+
+nav#navigation .menu{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 60%;
+}
+
+/*Pegar apena o primeiro ul do menu*/
+nav#navigation .menu ul:nth-child(1){
+  display: flex;
+  gap: 3.2rem;
+}
+
+nav#navigation .menu ul li a{
+  color: var(--primary-color);
+  opacity: 0.7;
+}
+
+nav#navigation .menu a.button{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem 2.4rem;
+  border: 1px solid var(--primary-color);
+  border-radius: 4rem;
+  color: var(--primary-color);
+  font-size: 1.4rem;
+  font-weight: 700;
+  line-height: 1.8rem;
+  text-transform: uppercase;
+}
+
+nav#navigation .menu  a.button:hover{
+  background-color: var(--primary-color);
+  border: none;
+  color: #fff;
+  
+}
+
+nav#navigation .menu li a{
+  transition: opacity 0.4s;
+}
+
+nav#navigation.scroll .menu ul li a{
+  color: var(--bg-green-light);
+  opacity: 0.6;
+}
+nav#navigation.scroll .menu a.button{
+  border-color: #fff;
+  color: #fff;
+}
+
+nav#navigation .menu li a:hover{
+  opacity: 1;
+  font-weight: 700;
+}
+nav#navigation .menu li a::after{
+  content: '';
+  width: 0%;
+  height: 2px;
+  background-color: var(--primary-color);
+  position: relative;
+  bottom: -2rem;
+  left: -0.5rem;
+  display: block;
+  transition: width 0.2s;
+
+}
+
+nav#navigation.scroll .menu li a::after{
+  background-color: #fff;
+}
+
+nav#navigation .menu li a:hover::after{
+  padding-inline: 0.8rem;
+  width: 100%;
+}
+
+nav#navigation.scroll .menu li a:hover{
+  opacity: 1;
+}
+
+nav#navigation.scroll .menu a.button:hover{
+  background-color: var(--primary-color);
+  filter: brightness(1.2);
+  border: none;
+}
+
+/*----------------HOME----------------*/
+#home::before{
+  height: calc(86% - var(--nav-height));
+}
+
+#home{
+  padding-top: var(--nav-height);
+}
+
+#home .wrapper{
+  grid-template-columns: 60.5rem 1fr; /*fr = fração (calcula uma fraçao do espaço)*/
+  grid-template-areas: 
+  'A B'
+  'C C';
+}
+
+#home .col-a{
+  grid-area: A;
+  text-align: left;
+  align-self: center; /*pegar a propria coluna*/
+}
+
+#home .col-b{
+  grid-area: B;
+}
+
+#home h1{
+  font-size: 5.2rem;
+}
+
+#home .content p{
+  font-size: 1.8rem;
+}
+
+
+#home .estatisticas{
+  grid-area: C;
+  flex-direction: row;
+  padding: 6rem;
+  gap: 0;
+}
+/*Procurar na estatisticas qual estatistica tem como antecessor outra estatistica*/
+#home .estatisticas .estatistica + .estatistica{
+  border-left: 1px solid var(--primary-color);
+}
+/*calcula e define uma largura igual para os elementos que estão na caixa*/
+#home .estatisticas .estatistica{
+  flex: 1;
+}
+
+#home .button{
+  margin: 0;
+}
+
+#home img{
+  width: 42rem;
+}
+
+}
+
